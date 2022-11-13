@@ -130,11 +130,13 @@ while(running == 1):
                 elif(display_choice == 2):
                     print("")
                     display_choice = input("Enter the modelNo to search for: ")
-                    display_string = "No display found with specified modelNo."
+                    display_found = 0
                     for x in myresult:
                         if(display_choice == x[2]):
-                            display_string = "Display found:"+" serialNo- '"+x[0]+"' ,"+" schedulerSystem- '"+x[1]+"' ,"+" modelNo- '"+x[2]+"'"
-                    print(display_string)
+                            print("Display found:"+" serialNo- '"+x[0]+"' ,"+" schedulerSystem- '"+x[1]+"' ,"+" modelNo- '"+x[2]+"'")
+                            display_found = 1
+                    if(display_found == 0):
+                        print("No display found with specified modelNo.")
                     print("")
                 elif(display_choice == 3):
                     displaying = 0

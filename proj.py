@@ -58,17 +58,23 @@ while(running == 1):
     print("6. Logout")
     choice = input("Enter a choice (1-6): ")
     print("")
-    if(int(choice) == 1):
+
+    try:
+        choice = int(choice)
+    except:
+        choice = 0
+    
+    if(choice == 1):
         print("Display all the digital displays.")
-    elif(int(choice) == 2):
+    elif(choice == 2):
         print("Search digital displays given a scheduler system")
-    elif(int(choice) == 3):
+    elif(choice == 3):
         print("Insert a new digital display")
-    elif(int(choice) == 4):
+    elif(choice == 4):
         print("Delete a digital display")
-    elif(int(choice) == 5):
+    elif(choice == 5):
         print("Update a digital display")
-    elif(int(choice) == 6):
+    elif(choice == 6):
         running = 0
         print("Successful logout")
     else:

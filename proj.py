@@ -241,34 +241,34 @@ while(running == 1):
                         try:
                             while(True):
                                 width_user = round(float(input("Enter width: ")), 2)
-                                if(width_user > 0):
+                                if(width_user > 0 and width_user < 9999.99):
                                     break
                                 else:
-                                    print("Invalid width. Must be a positive number.")
+                                    print("Invalid width. Must be a positive number less than 9999.99.")
                             while(True):
                                 height_user = round(float(input("Enter height: ")), 2)
-                                if(height_user > 0):
+                                if(height_user > 0 and height_user < 9999.99):
                                     break
                                 else:
-                                    print("Invalid height. Must be a positive number.")
+                                    print("Invalid height. Must be a positive number less than 9999.99.")
                             while(True):
                                 weight_user = round(float(input("Enter weight: ")), 2)
-                                if(weight_user > 0):
+                                if(weight_user > 0 and weight_user < 9999.99):
                                     break
                                 else:
-                                    print("Invalid weight. Must be a positive number.")
+                                    print("Invalid weight. Must be a positive number less than 9999.99.")
                             while(True):
                                 depth_user = round(float(input("Enter depth: ")), 2)
-                                if(depth_user > 0):
+                                if(depth_user > 0 and depth_user < 9999.99):
                                     break
                                 else:
-                                    print("Invalid depth. Must be a positive number.")
+                                    print("Invalid depth. Must be a positive number less than 9999.99.")
                             while(True):
                                 screensize_user = round(float(input("Enter screen size: ")), 2)
-                                if(screensize_user > 0):
+                                if(screensize_user > 0 and screensize_user < 9999.99):
                                     break
                                 else:
-                                    print("Invalid screen size. Must be a positive number.")
+                                    print("Invalid screen size. Must be a positive number less than 9999.99.")
                             print("")
                             print("You are about to create a Model with the following attributes:")
                             print("modelNo: "+modelNo_user)
@@ -362,6 +362,7 @@ while(running == 1):
                         displaying = 0
                         break
 
+                add_display = 1
                 print("")
                 print("You are about to create a DigitalDisplay with the following attributes:")
                 print("serialNo: "+serialNo_user)
@@ -374,15 +375,17 @@ while(running == 1):
                     if(confirm_choice.lower()[0] == 'y'):
                         print("DigitalDisplay added.")
                         print("")
-                        ask_model_info = 0
                         break
                     if(confirm_choice.lower()[0] == 'n'):
                         print("Going to main menu.")
-                        ask_model_info = 0
-                        add_model = 0
+                        add_display = 0
                         break
                     else:
                         print("Invalid choice.")
+
+                if(add_display == 0):
+                    displaying = 0
+                    break
 
                 data = [(serialNo_user, scheduler_user, modelNo_user)]
                 sql = "insert into DigitalDisplay(serialNo, schedulerSystem, modelNo) values (%s, %s, %s);"
@@ -602,27 +605,106 @@ while(running == 1):
                                     print("Leave blank to not update.")
                                     print("")
                             
+                            update_mdl = ""
+                            while(True):
+                                update_mdl = input("Enter model number: ").strip()
+                                if(update_mdl == '?stop#'):
+                                    break
+                                if(len(update_mdl)>=0 and len(update_mdl)<11):
+                                    break
+                                else:
+                                    print("")
+                                    print("Invalid model number. Minimum length: 1,Maximum length: 10")
+                                    print("Type '?stop#' to exit.")
+                                    print("")
+                            if(update_mdl == '?stop#'):
+                                displaying = 0
+                                break   
+
                             # get model numbers from db
                             sql = "SELECT modelNo FROM Model;"
                             mycursor.execute(sql)
                             myresultM2 = mycursor.fetchall()
 
-                            update_mdl = ""
-                            while(True):
-                                update_mdl = input(f'Enter update to model number for serial number: {update_serialNo}: ').strip()
-                                if(update_mdl == ''):
+                            model_found = 0
+                            for x in myresultM2:
+                                if(update_mdl == x[0]):
+                                    model_found = 1
+
+                            # update model if model not exist
+                            if ((len(myresultM2) == 0) or model_found == 0) and (len(update_mdl) != 0):
+                                print("")
+                                print("Model number not found. Updating model information.")
+
+                                ask_model_info = 1
+                                add_model = 1
+                                while(ask_model_info == 1):
+                                    try:
+                                        while(True):
+                                            width_user = round(float(input("Enter width: ")), 2)
+                                            if(width_user > 0 and width_user < 9999.99):
+                                                break
+                                            else:
+                                                print("Invalid width. Must be a positive number less than 9999.99.")
+                                        while(True):
+                                            height_user = round(float(input("Enter height: ")), 2)
+                                            if(height_user > 0 and height_user < 9999.99):
+                                                break
+                                            else:
+                                                print("Invalid height. Must be a positive number less than 9999.99.")
+                                        while(True):
+                                            weight_user = round(float(input("Enter weight: ")), 2)
+                                            if(weight_user > 0 and weight_user < 9999.99):
+                                                break
+                                            else:
+                                                print("Invalid weight. Must be a positive number less than 9999.99.")
+                                        while(True):
+                                            depth_user = round(float(input("Enter depth: ")), 2)
+                                            if(depth_user > 0 and depth_user < 9999.99):
+                                                break
+                                            else:
+                                                print("Invalid depth. Must be a positive number less than 9999.99.")
+                                        while(True):
+                                            screensize_user = round(float(input("Enter screen size: ")), 2)
+                                            if(screensize_user > 0 and screensize_user < 9999.99):
+                                                break
+                                            else:
+                                                print("Invalid screen size. Must be a positive number less than 9999.99.")
+                                        print("")
+                                        print("You are about to create a Model with the following attributes:")
+                                        print("modelNo: "+update_mdl)
+                                        print("width: "+str(width_user))
+                                        print("height: "+str(height_user))
+                                        print("weight: "+str(weight_user))
+                                        print("depth: "+str(depth_user))
+                                        print("screenSize: "+str(screensize_user))
+
+                                        while(True):
+                                            print("")
+                                            confirm_choice = input("Do you wish to proceed? (Y/N): ")
+                                            if(confirm_choice.lower()[0] == 'y'):
+                                                print("Model added.")
+                                                ask_model_info = 0
+                                                break
+                                            if(confirm_choice.lower()[0] == 'n'):
+                                                print("Going to main menu.")
+                                                ask_model_info = 0
+                                                add_model = 0
+                                                break
+                                            else:
+                                                print("Invalid choice.")
+                                    except:
+                                        print("")
+                                        print("Invalid data. Enter positive numbers only.")
+
+                                if(add_model == 0):
+                                    displaying = 0
                                     break
-                                model_found = 0
-                                for x in myresultM2:
-                                    if(update_mdl == x[0]):
-                                        model_found = 1
-                                if(model_found == 1):
-                                    break
-                                else:
-                                    print("")
-                                    print("Invalid model number.")
-                                    print("Leave blank to not update.")
-                                    print("")
+
+                                data = [(update_mdl, width_user, height_user, weight_user, depth_user, screensize_user)]
+                                sql = "insert into Model(modelNo, width, height, weight, depth, screenSize) values (%s, %s, %s, %s, %s, %s);"
+                                mycursor.executemany(sql, data)
+                                mydb.commit()
 
                             print("")
                             # store update data

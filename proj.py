@@ -95,7 +95,7 @@ while(running == 1):
     print("5. Update a digital display")
     print("6. Logout")
     print("7. Quit")
-    choice = input("Enter a choice (1-7): ")
+    choice = input("Enter a choice (1-7): ").strip()
     print("")
 
     try:
@@ -115,7 +115,7 @@ while(running == 1):
                 print("1. List all displays")
                 print("2. List display by modelNo")
                 print("3. Exit to main menu")
-                display_choice = input("Enter a choice (1-3): ")
+                display_choice = input("Enter a choice (1-3): ").strip()
                 try:
                     display_choice = int(display_choice)
                 except:
@@ -125,16 +125,16 @@ while(running == 1):
                     print("")
                     display_no = 1
                     for x in myresult:
-                        print("Display "+str(display_no)+":"+" serialNo- '"+x[0]+"' ,"+" schedulerSystem- '"+x[1]+"' ,"+" modelNo- '"+x[2]+"'")
+                        print("Display "+str(display_no)+":"+" serialNo- '"+str(x[0])+"' ,"+" schedulerSystem- '"+str(x[1])+"' ,"+" modelNo- '"+str(x[2])+"'")
                         display_no = display_no + 1
                     print("")
                 elif(display_choice == 2):
                     print("")
-                    display_choice = input("Enter the modelNo to search for: ")
+                    display_choice = input("Enter the modelNo to search for: ").strip()
                     display_found = 0
                     for x in myresult:
-                        if(display_choice == x[2]):
-                            print("Display found:"+" serialNo- '"+x[0]+"' ,"+" schedulerSystem- '"+x[1]+"' ,"+" modelNo- '"+x[2]+"'")
+                        if(display_choice == str(x[2])):
+                            print("Display found:"+" serialNo- '"+str(x[0])+"' ,"+" schedulerSystem- '"+str(x[1])+"' ,"+" modelNo- '"+str(x[2])+"'")
                             display_found = 1
                     if(display_found == 0):
                         print("No display found with specified modelNo.")
@@ -158,7 +158,7 @@ while(running == 1):
             while (displaying == 1):
                 print("1. Search digital displays by scheduler system")
                 print("2. Exit to main menu")
-                display_choice = input("Enter a choice (1 or 2): ")
+                display_choice = input("Enter a choice (1 or 2): ").strip()
                 try:
                     display_choice = int(display_choice)
                 except:
@@ -171,9 +171,8 @@ while(running == 1):
                                            "to search by: ").strip().lower()
                     display_found = 0
                     for x in myresultDD2:
-                        display_no = 1
-                        if (display_choice == x[1].lower()):
-                            print(f'Display {display_no}: serialNo- {x[0]}, schedulerSystem- {x[1]}, modelNo- {x[2]}')
+                        if (display_choice == str(x[1]).lower()):
+                            print(f'Display {display_no}: serialNo- {str(x[0])}, schedulerSystem- {str(x[1])}, modelNo- {str(x[2])}')
                             display_no += 1
                             display_found = 1
                     if (display_found == 0):
@@ -195,7 +194,7 @@ while(running == 1):
         while (displaying == 1):
             print("1. Insert a new digital display")
             print("2. Exit to main menu")
-            display_choice = input("Enter a choice (1 or 2): ")
+            display_choice = input("Enter a choice (1 or 2): ").strip()
             try:
                 display_choice = int(display_choice)
             except:
@@ -227,7 +226,7 @@ while(running == 1):
 
                 model_found = 0
                 for x in myresultM2:
-                    if(modelNo_user == x[0]):
+                    if(modelNo_user == str(x[0])):
                         model_found = 1
 
                 # update model if model not exist
@@ -280,7 +279,7 @@ while(running == 1):
 
                             while(True):
                                 print("")
-                                confirm_choice = input("Do you wish to proceed? (Y/N): ")
+                                confirm_choice = input("Do you wish to proceed? (Y/N): ").strip()
                                 if(confirm_choice.lower()[0] == 'y'):
                                     print("Model added.")
                                     ask_model_info = 0
@@ -331,7 +330,7 @@ while(running == 1):
 
                 serial_found = 0
                 for x in myresultM2:
-                    if(serialNo_user == x[0]):
+                    if(serialNo_user == str(x[0])):
                         serial_found = 1
 
                 if(serial_found == 1):
@@ -371,7 +370,7 @@ while(running == 1):
                 
                 while(True):
                     print("")
-                    confirm_choice = input("Do you wish to proceed? (Y/N): ")
+                    confirm_choice = input("Do you wish to proceed? (Y/N): ").strip()
                     if(confirm_choice.lower()[0] == 'y'):
                         print("DigitalDisplay added.")
                         print("")
@@ -400,7 +399,7 @@ while(running == 1):
                 display_no = 1
 
                 for x in myresultDD3:
-                    print(f'Display {display_no}: serialNo- {x[0]}, schedulerSystem- {x[1]}, modelNo- {x[2]}')
+                    print(f'Display {display_no}: serialNo- {str(x[0])}, schedulerSystem- {str(x[1])}, modelNo- {str(x[2])}')
                     display_no += 1
 
                 print("")
@@ -424,7 +423,7 @@ while(running == 1):
 
             # show DigitalDisplay data
             for x in myresultDD4:
-                print(f'Display {display_no}: serialNo- {x[0]}, schedulerSystem- {x[1]}, modelNo- {x[2]}')
+                print(f'Display {display_no}: serialNo- {str(x[0])}, schedulerSystem- {str(x[1])}, modelNo- {str(x[2])}')
                 display_no += 1
                 display_found = 1
             print()
@@ -434,7 +433,7 @@ while(running == 1):
                 print("2. Exit to main menu")
 
                 # get user selection
-                display_choice = input("Enter a choice (1 or 2): ")
+                display_choice = input("Enter a choice (1 or 2): ").strip()
                 try:
                     display_choice = int(display_choice)
                 except:
@@ -453,9 +452,9 @@ while(running == 1):
 
                     serial_found = 0
                     for x in myresultDD5:
-                        if(delete_choice == x[0]):
+                        if(delete_choice == str(x[0])):
                             serial_found = 1
-                            model_delete = x[1]
+                            model_delete = str(x[1])
                             break
 
                     if(serial_found == 0):
@@ -467,7 +466,7 @@ while(running == 1):
                     print("You are about to delete a DigitalDisplay with serialNo '"+delete_choice+"'")
                     while(True):
                         print("")
-                        confirm_choice = input("Do you wish to proceed? (Y/N): ")
+                        confirm_choice = input("Do you wish to proceed? (Y/N): ").strip()
                         if(confirm_choice.lower()[0] == 'y'):
                             print("DigitalDisplay deleted.")
                             print("")
@@ -495,7 +494,7 @@ while(running == 1):
                     myresultDD6 = mycursor.fetchall()
                     
                     for x in myresultDD6:
-                        if(model_delete == x[0]):
+                        if(model_delete == str(x[0])):
                             sql = 'DELETE FROM Model WHERE modelNo like %s;'
                             mycursor.execute(sql, ([model_delete]))
                             mydb.commit()
@@ -514,7 +513,7 @@ while(running == 1):
 
                         # show DigitalDisplay data
                         for x in myresultDD4:
-                            print(f'Display {display_no}: serialNo- {x[0]}, schedulerSystem- {x[1]}, modelNo- {x[2]}')
+                            print(f'Display {display_no}: serialNo- {str(x[0])}, schedulerSystem- {str(x[1])}, modelNo- {str(x[2])}')
                             display_no += 1
                         print()
                     else:
@@ -531,7 +530,7 @@ while(running == 1):
 
                         # show DigitalDisplay data
                         for x in myresultDD4:
-                            print(f'Model {display_no}: modelNo- {x[0]}, width- {x[1]}, height- {x[2]}, weight- {x[3]}, depth- {x[4]}, screenSize- {x[5]}')
+                            print(f'Model {display_no}: modelNo- {str(x[0])}, width- {str(x[1])}, height- {str(x[2])}, weight- {str(x[3])}, depth- {str(x[4])}, screenSize- {str(x[5])}')
                             display_no += 1
                         print()
                     else:
@@ -558,7 +557,7 @@ while(running == 1):
 
             # show DigitalDisplay data
             for x in myresultDD7:
-                print(f'Display {display_no}: serialNo- {x[0]}, schedulerSystem- {x[1]}, modelNo- {x[2]}')
+                print(f'Display {display_no}: serialNo- {str(x[0])}, schedulerSystem- {str(x[1])}, modelNo- {str(x[2])}')
                 display_no += 1
                 display_found = 1
             print()
@@ -568,7 +567,7 @@ while(running == 1):
                 print("2. Exit to main menu")
 
                 # get user selection
-                display_choice = input("Enter a choice (1 or 2): ")
+                display_choice = input("Enter a choice (1 or 2): ").strip()
                 try:
                     display_choice = int(display_choice)
                 except:
@@ -580,7 +579,7 @@ while(running == 1):
                     # get record to update
                     update_serialNo = input("Enter the 'serialNo' for the Digital Display to update: ").strip()
                     for x in myresultDD7:
-                        if x[0] == update_serialNo:
+                        if str(x[0]) == update_serialNo:
                             print()
                             # get updates to perform
                             print('Enter updates at prompt, if not applicable, leave blank.')
@@ -628,7 +627,7 @@ while(running == 1):
 
                             model_found = 0
                             for x in myresultM2:
-                                if(update_mdl == x[0]):
+                                if(update_mdl == str(x[0])):
                                     model_found = 1
 
                             # update model if model not exist
@@ -681,7 +680,7 @@ while(running == 1):
 
                                         while(True):
                                             print("")
-                                            confirm_choice = input("Do you wish to proceed? (Y/N): ")
+                                            confirm_choice = input("Do you wish to proceed? (Y/N): ").strip()
                                             if(confirm_choice.lower()[0] == 'y'):
                                                 print("Model added.")
                                                 ask_model_info = 0
@@ -729,8 +728,8 @@ while(running == 1):
                             
                             # show digital displays
                             for x in myresultDD8:
-                                print(f'Display {display_no}: serialNo- {x[0]}, '
-                                    f'schedulerSystem- {x[1]}, modelNo- {x[2]}')
+                                print(f'Display {display_no}: serialNo- {str(x[0])}, '
+                                    f'schedulerSystem- {str(x[1])}, modelNo- {str(x[2])}')
                                 display_no += 1
                     print()
 
